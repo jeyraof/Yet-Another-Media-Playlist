@@ -4,13 +4,72 @@
     <title>{% block title %}{% endblock %}</title>
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.4.2/pure-min.css"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}"/>
     {% block css %}{% endblock %}
-
 
     {% block js %}{% endblock %}
 </head>
 <body>
-    {% block content %}{% endblock %}
+    <div class="sidebar">
+        <div class="inner">
+            {% if not user %}
+                <a class="google-login" href="{{ url_for('user.oauth_google') }}">
+                    <img src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png">
+                </a>
+            {% else %}
+                <div class="profileBox">
+                    <a class="thumbnail" href="#">
+                        <img src="{{ user.picture }}">
+                    </a>
+                    <a class="logout" href="{{ url_for('user.logout') }}" title="logout">
+                        <i class="fa fa-sign-out"></i>
+                        Sign out
+                    </a>
+                    <div class="account">
+                        <div class="id_str">
+                            <a href="#">@{{ user.id_str }}</a>
+                        </div>
+                        <span class="email">
+                            <a href="#">{{ user.email }}</a>
+                        </span>
+                    </div>
+                </div>
+
+                <ul class="menu">
+                    <li>
+                        <a href="#">
+                            <span class="label">
+                                <i class="fa fa-star-o fa-fw"></i>
+                                Archived Media
+                            </span>
+                            <span class="value">237</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <span class="label">
+                                <i class="fa fa-list fa-fw"></i>
+                                Playlist
+                            </span>
+                            <span class="value">1</span>
+                        </a>
+                    </li>
+                </ul>
+            {% endif %}
+
+            <div class="maker">
+                <span><a href="https://github.com/jeyraof"><i class="fa fa-github"></i> Github</a></span>
+                <span class="divider"></span>
+                <span><a href="https://twitter.com/jeyraof"><i class="fa fa-twitter"></i> Twitter</a></span>
+                <span class="divider"></span>
+                <span>2014.05.18.</span>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 </body>
 </html>
