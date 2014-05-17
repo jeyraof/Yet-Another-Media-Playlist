@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy.sql.expression import func
-from sqlalchemy import Column, types, Index
+from sqlalchemy import Column, types
 from yayp.models import Base
 
 
