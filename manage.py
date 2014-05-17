@@ -20,11 +20,15 @@ def runserver(host, port, debug):
     """
     Run server using flask
     """
-    from yayp.app import app
-    app.run(host=str(host),
-            port=int(port),
-            debug=bool(debug))
-
+    try:
+        from yayp.app import app
+        app.run(host=str(host),
+                port=int(port),
+                debug=bool(debug))
+    except Exception as msg:
+        print 'Failed to run server:'
+        print '====================='
+        print msg
 
 @cli.command()
 def init_db():
