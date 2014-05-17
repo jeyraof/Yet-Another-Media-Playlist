@@ -30,12 +30,23 @@ def runserver(host, port, debug):
         print '====================='
         print msg
 
+
 @cli.command()
 def init_db():
     """
     Initialize tables you defined via models
     """
-    pass
+    print 'Initialize DB'
+    from yayp.app import db, engine
+    from yayp.models import Base, __all__ as model_files
+    from importlib import import_module
+    for model_file in model_files:
+        import_module('yayp.models.' + model_file, __name__)
+        print '* Model "%s" loaded.' % model_file
+    Base.metadata.create_all(bind=engine)
+    db.commit()
+    print '... All tables created!'
+    raise SystemExit
 
 
 @cli.command()
@@ -43,7 +54,17 @@ def drop_db():
     """
     Drop all of tables you defined via models
     """
-    pass
+    print 'Drop DB'
+    from yayp.app import db, engine
+    from yayp.models import Base, __all__ as model_files
+    from importlib import import_module
+    for model_file in model_files:
+        import_module('yayp.models.' + model_file, __name__)
+        print '* Model "%s" loaded.' % model_file
+    Base.metadata.drop_all(bind=engine)
+    db.commit()
+    print '... All tables deleted!'
+    raise SystemExit
 
 
 if __name__ == '__main__':
