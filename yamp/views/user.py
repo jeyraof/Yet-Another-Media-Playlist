@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
 
 from flask import Blueprint, url_for, request
-from yamp.helpers.oauth import Google
+from yamp.helpers.oauth import google
 
 view = Blueprint('user', __name__, url_prefix='/user')
-google = Google()
 
 
 def apply_view(app):
@@ -18,14 +17,14 @@ def login_html():
 
 @view.route('/oauth/google')
 def oauth_google():
-    return google.engine.authorize(callback=url_for(
+    return google.authorize(callback=url_for(
         'user.google_authorized',
         _external=True,
     ))
 
 
 @view.route('/oauth/google/authorized')
-@google.engine.authorized_handler
+@google.authorized_handler
 def google_authorized(response):
     print response
     return 'Done'
