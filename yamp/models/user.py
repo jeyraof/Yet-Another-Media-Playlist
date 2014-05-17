@@ -13,4 +13,6 @@ class User(Base):
     email = Column('email', types.Unicode(255), nullable=False, default=u'', index=True)
     password = Column('password', types.Unicode(255), nullable=False, default=u'')
 
+    active = Column('active', types.Boolean, default=0)
+
     registered_at = Column('mb_datetime', types.DateTime, nullable=False, default=func.now(), index=True)
