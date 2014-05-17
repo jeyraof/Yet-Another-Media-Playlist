@@ -46,10 +46,12 @@ class UserController(BaseController):
 
         user_id = user_email.split('@')[0]
         user_pw = md5('%s%s%s' % ('go', user_id, 'google')).hexdigest()[:20]
+        user_pic = data.get('picture')
 
         created_user = User(id_str=user_email.split('@')[0],
                             email=user_email,
-                            password=user_pw)
+                            password=user_pw,
+                            picture=user_pic)
         db.add(created_user)
         db.commit()
 

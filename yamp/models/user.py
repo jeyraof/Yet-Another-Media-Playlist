@@ -12,6 +12,7 @@ class User(Base):
     id_str = Column('id_str', types.Unicode(255), nullable=False, default=u'', index=True)
     email = Column('email', types.Unicode(255), nullable=False, default=u'', unique=True, index=True)
     password = Column('password', types.Unicode(255), nullable=False, default=u'')
+    picture = Column('picture', types.Unicode(255), nullable=True, default=u'')
 
     active = Column('active', types.Boolean, default=False)
 
