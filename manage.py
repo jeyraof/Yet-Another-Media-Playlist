@@ -6,27 +6,39 @@ import click
 
 @click.group()
 def cli():
+    """
+    Group for commands
+    """
     pass
 
 
 @cli.command()
-@click.option('--host', '-h', default='0.0.0.0', help='host (default: 0.0.0.0)')
-@click.option('--port', '-p', default=8001, help='port (default: 8001)')
-@click.option('--debug', '-d', default=True, help='debug (default: True)')
+@click.option('--host', '-h', default='0.0.0.0', help='runserver with specific host', show_default=True)
+@click.option('--port', '-p', default=8001, help='runserver with specific port', show_default=True)
+@click.option('--debug', '-d', is_flag=True, help='runserver with debug mode', default=False, show_default=True)
 def runserver(host, port, debug):
+    """
+    Run server using flask
+    """
     from yayp.app import app
     app.run(host=str(host),
             port=int(port),
-            debug=not bool(debug))
+            debug=bool(debug))
 
 
 @cli.command()
 def init_db():
+    """
+    Initialize tables you defined via models
+    """
     pass
 
 
 @cli.command()
 def drop_db():
+    """
+    Drop all of tables you defined via models
+    """
     pass
 
 
