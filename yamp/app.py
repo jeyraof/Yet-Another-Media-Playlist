@@ -8,6 +8,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 path = os.path.dirname(__file__)
 app = Flask(__name__)
 app.config.from_pyfile(os.path.join(path, '..', 'config.cfg'))
+app.secret_key = app.config.get('SECRET_KEY')
 
 engine = create_engine(app.config.get('DB_URI'))
 db = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
