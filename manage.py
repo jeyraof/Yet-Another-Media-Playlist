@@ -21,7 +21,7 @@ def runserver(host, port, debug):
     Run server using flask
     """
     try:
-        from yayp.app import app
+        from yayp import app
         app.run(host=str(host),
                 port=int(port),
                 debug=bool(debug))
