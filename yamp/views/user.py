@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, url_for, session, flash, redirect
+from flask import Blueprint, url_for, session, flash, redirect, make_response
 from yamp.helpers.oauth import google, GOOGLE_TOKEN_NAME
 from yamp.controllers.user import UserController
 
@@ -12,8 +12,14 @@ def apply_view(app):
 
 
 @view.route('/login')
-def login_html():
+def login():
     return u'<a href="/user/oauth/google">로그인</a>'
+
+
+@view.route('/logout', methods=['GET'])
+def logout():
+    UserController.logout()
+    return redirect(url_for('main.index'))
 
 
 @view.route('/oauth/google')

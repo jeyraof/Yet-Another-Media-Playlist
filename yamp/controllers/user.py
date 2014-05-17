@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from hashlib import md5
-from flask import session
+from flask import session, g
 from yamp.controllers import BaseController
 from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
@@ -17,6 +17,7 @@ class UserController(BaseController):
         if isinstance(user_info, User):
             # user_info 가 User 객체인경우
             session['id_str'] = user_info.id_str
+            session['id_int'] = user_info.id_int
             session.permanent = False
             return True
 
@@ -26,6 +27,15 @@ class UserController(BaseController):
             pass
 
         return False
+
+    @classmethod
+    def is_login(cls):
+        return g.user or None
+
+    @classmethod
+    def logout(cls):
+        session.clear()
+        return
 
     @classmethod
     def register_google(cls, response):

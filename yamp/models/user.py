@@ -6,7 +6,7 @@ from yamp.models import Base
 
 
 class User(Base):
-    __tablename__ = u'yamp_user'
+    __tablename__ = u'user'
 
     id_int = Column('id_int', types.Integer, nullable=False, primary_key=True, autoincrement=True)
     id_str = Column('id_str', types.Unicode(255), nullable=False, default=u'', index=True)
@@ -16,4 +16,4 @@ class User(Base):
 
     active = Column('active', types.Boolean, default=False)
 
-    registered_at = Column('mb_datetime', types.DateTime, nullable=False, default=func.now(), index=True)
+    joined_at = Column('joined_at', types.DateTime, nullable=False, default=func.now(), index=True)
