@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from importlib import import_module
-from yayp import views
-from yayp.app import app
+from yamp import views
+from yamp.app import app
 
 
 for view_name in views.__all__:

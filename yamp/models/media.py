@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from sqlalchemy import Column, types
-from yayp.models import Base, IntegerChoiceType, JSONEncodedDict
+from yamp.models import Base, IntegerChoiceType, JSONEncodedDict
 
 
 class Media(Base):
-    __tablename__ = 'yayp_media'
+    __tablename__ = u'yamp_media'
 
     id_int = Column('id_int', types.Integer, nullable=False, primary_key=True, autoincrement=True)
     id_str = Column('id_str', types.Unicode(255), nullable=False, default=u'', index=True)

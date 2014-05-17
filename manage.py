@@ -21,7 +21,7 @@ def runserver(host, port, debug):
     Run server using flask
     """
     try:
-        from yayp import app
+        from yamp import app
         app.run(host=str(host),
                 port=int(port),
                 debug=bool(debug))
@@ -37,11 +37,11 @@ def init_db():
     Initialize tables you defined via models
     """
     print 'Initialize DB'
-    from yayp.app import db, engine
-    from yayp.models import Base, __all__ as model_files
+    from yamp.app import db, engine
+    from yamp.models import Base, __all__ as model_files
     from importlib import import_module
     for model_file in model_files:
-        import_module('yayp.models.' + model_file, __name__)
+        import_module('yamp.models.' + model_file, __name__)
         print '* Model "%s" loaded.' % model_file
     Base.metadata.create_all(bind=engine)
     db.commit()
@@ -55,11 +55,11 @@ def drop_db():
     Drop all of tables you defined via models
     """
     print 'Drop DB'
-    from yayp.app import db, engine
-    from yayp.models import Base, __all__ as model_files
+    from yamp.app import db, engine
+    from yamp.models import Base, __all__ as model_files
     from importlib import import_module
     for model_file in model_files:
-        import_module('yayp.models.' + model_file, __name__)
+        import_module('yamp.models.' + model_file, __name__)
         print '* Model "%s" loaded.' % model_file
     Base.metadata.drop_all(bind=engine)
     db.commit()

@@ -2,11 +2,11 @@
 
 from sqlalchemy.sql.expression import func
 from sqlalchemy import Column, types
-from yayp.models import Base
+from yamp.models import Base
 
 
 class User(Base):
-    __tablename__ = u'yayp_user'
+    __tablename__ = u'yamp_user'
 
     id_int = Column('id_int', types.Integer, nullable=False, primary_key=True, autoincrement=True)
     id_str = Column('id_str', types.Unicode(255), nullable=False, default=u'', index=True)
