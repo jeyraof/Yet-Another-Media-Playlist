@@ -1,8 +1,2 @@
 # Database
-# format: DB_TYPE://DB_USER:DB_PASS@DB_HOST:DB_PORT/DB_NAME?charset=utf-8
-DB_TYPE = ''
-DB_HOST = ''
-DB_PORT = ''
-DB_USER = ''
-DB_PASS = ''
-DB_NAME = ''
+DB_URI = 'mysql://user:pass@host:port/dbname?charset=utf8'
