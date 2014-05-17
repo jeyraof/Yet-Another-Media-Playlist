@@ -15,8 +15,5 @@ def before_request():
     session.permanent = True
     g.user = None
 
-    def set_user_by_id_int():
-        g.user = db.query(User).get(session['id_int'])
-
     if 'id_int' in session:
-        set_user_by_id_int()
+        g.user = db.query(User).get(session['id_int'])
