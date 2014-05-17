@@ -1,2 +1,9 @@
+# Application Secret key
+SECRET_KEY = ''
+
 # Database
 DB_URI = 'mysql://user:pass@host:port/dbname?charset=utf8'
+
+# Google OAuth
+GOOGLE_CLIENT_ID = ''
+GOOGLE_CLIENT_SECRET = ''
