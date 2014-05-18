@@ -6,6 +6,7 @@ from yamp.controllers import BaseController
 from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.playlist import Playlist
+from yamp.models.user import User
 
 
 class PlaylistController(BaseController):
@@ -51,3 +52,21 @@ class PlaylistController(BaseController):
         }
 
         return cls.create(**params)
+
+    @classmethod
+    def get_archived_media(cls, **kwargs):
+        """
+        Parameters:
+        user: owner of playlist
+        """
+        playlist = db.query(Playlist)
+
+        user = kwargs.get('user', g.user)
+        if isinstance(user, User):
+            playlist = playlist.filter_by(owner=user.id_int)
+        elif isinstance(user, int):
+            playlist = playlist.filter_by(owner=user)
+
+        playlist = playlist.order_by('created_at').first()
+
+        return playlist.medias if playlist else []
