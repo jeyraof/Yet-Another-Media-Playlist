@@ -2,6 +2,8 @@
 __author__ = 'Jaeyoung'
 
 __all__ = [
-    'main',
+    'playlist',
+    'media',
     'user',
+    'main',
 ]
