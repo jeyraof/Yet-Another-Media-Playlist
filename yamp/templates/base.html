@@ -38,12 +38,12 @@
 
                 <ul class="menu">
                     <li>
-                        <a href="#">
+                        <a href="{{ url_for('user.archived') }}">
                             <span class="label">
                                 <i class="fa fa-star-o fa-fw"></i>
                                 Archived Media
                             </span>
-                            <span class="value">237</span>
+                            <span class="value">{{ archived_playlist.item_count|int_with_comma }}</span>
                         </a>
                     </li>
 
@@ -53,7 +53,7 @@
                                 <i class="fa fa-list fa-fw"></i>
                                 Playlist
                             </span>
-                            <span class="value">1</span>
+                            <span class="value">{{ playlist_number|int_with_comma }}</span>
                         </a>
                     </li>
                 </ul>
