@@ -21,7 +21,7 @@ class DefaultBase(object):
     }
 
     def __repr__(self):
-        return '<%s id=%d>' % (type(self).__name__, self.id)
+        return '<%s id_int=%d>' % (type(self).__name__, self.id_int)
 
 Base = declarative_base(cls=DefaultBase)
 
