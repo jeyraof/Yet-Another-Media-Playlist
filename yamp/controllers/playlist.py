@@ -6,6 +6,7 @@ from yamp.controllers import BaseController
 from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.playlist import Playlist
+from yamp.models.media import Media
 from yamp.models.user import User
 
 
@@ -103,6 +104,12 @@ class PlaylistController(BaseController):
 
     @classmethod
     def add_media(cls, playlist, media):
+        if isinstance(playlist, int):
+            playlist = db.query(Playlist).get(playlist)
+
+        if isinstance(media, int):
+            media = db.query(Media).get(media)
+
         if None in [playlist, media]:
             return False
 
