@@ -7,6 +7,7 @@ import json
 __all__ = [
     'user',
     'media',
+    'playlist',
 ]
 
 
@@ -34,6 +35,9 @@ class IntegerChoiceType(TypeDecorator):
         super(IntegerChoiceType, self).__init__(**kw)
 
     def process_bind_param(self, value, dialect):
+        # 튜플이 넘어올경우엔 그냥 [0] 을 사용하도록
+        if isinstance(value, tuple):
+            return value[0]
         return [k for k, v in self.choices.iteritems() if v == value][0]
 
     def process_result_value(self, value, dialect):
