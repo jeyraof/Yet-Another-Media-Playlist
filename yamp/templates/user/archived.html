@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-Archived
+    <ul>
+        {% for media in media_list %}
+            <li>{{ media.title }}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}
