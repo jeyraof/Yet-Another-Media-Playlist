@@ -23,3 +23,7 @@ class Media(Base):
     @property
     def title(self):
         return self.data.get(u'title', u'Nof found')
+
+    @property
+    def thumbnail(self):
+        return self.data.get(u'thumbnail', None)

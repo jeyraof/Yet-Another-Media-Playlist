@@ -94,9 +94,17 @@ class MediaController(BaseController):
 
         data = json_data.get('data')
 
+        thumbnail = data.get('thumbnail')
+        thumb_str = u'http://i1.ytimg.com/vi/%s/' % id_str
+        if 'hqDefault' in thumbnail:
+            thumb_str += u'hqdefault.jpg'
+        else:
+            thumb_str += u'default.jpg'
+
         param = {
             u'duration': data.get('duration'),
             u'title': data.get('title'),
+            u'thumbnail': thumb_str,
         }
 
         return {u'ok': True, u'info': param}
