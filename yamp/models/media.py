@@ -15,3 +15,11 @@ class Media(Base):
                         ]),
                         nullable=False, default=0, index=True)
     data = Column('data', JSONEncodedDict, nullable=True, default=u'')
+
+    @property
+    def duration(self):
+        return self.data.get(u'duration', 0)
+
+    @property
+    def title(self):
+        return self.data.get(u'title', u'Nof found')
