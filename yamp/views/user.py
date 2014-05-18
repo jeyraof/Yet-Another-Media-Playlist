@@ -3,6 +3,7 @@
 from flask import Blueprint, url_for, session, flash, redirect, make_response
 from yamp.helpers.oauth import google, GOOGLE_TOKEN_NAME
 from yamp.controllers.user import UserController
+from yamp.controllers.playlist import PlaylistController
 
 view = Blueprint('user', __name__, url_prefix='/user')
 
@@ -47,7 +48,10 @@ def google_authorized(response):
         if login_request:
             if result.get(u'created', False):
                 # 새로운 회원으로 가입 되었을때
+                playlist = PlaylistController.create_default_playlist(user=user)
                 flash(u'%s, 가입을 진심으로 환영합니다!' % user.id_str)
+                if not playlist.get(u'ok', True):
+                    flash(u'기본 플레이리스트가 생성되지 않았습니다.\n%s' % playlist.get(u'msg', u''))
 
             else:
                 # 기존 회원일때
