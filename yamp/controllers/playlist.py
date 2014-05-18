@@ -58,6 +58,7 @@ class PlaylistController(BaseController):
         """
         Parameters:
         user: owner of playlist
+        page: page number (integer, default=1)
         """
         playlist = db.query(Playlist)
 
@@ -69,4 +70,44 @@ class PlaylistController(BaseController):
 
         playlist = playlist.order_by('created_at').first()
 
-        return playlist.medias if playlist else []
+        media_ea = 20
+        page = kwargs.get('page', 1)
+        media_f = -1 * media_ea * page
+        media_t = media_f + media_ea
+
+        media_list = []
+        if playlist:
+            if media_t == 0:
+                media_list = playlist.media_list[media_f:]
+            else:
+                media_list = playlist.media_list[media_f:media_t]
+
+        media_list.reverse()
+        return media_list
+
+    @classmethod
+    def get_playlist_number(cls, **kwargs):
+        """
+        Parameters:
+        user: owner of playlist
+        """
+
+        playlist = db.query(Playlist)
+        user = kwargs.get('user', g.user)
+        if isinstance(user, User):
+            playlist = playlist.filter_by(owner=user.id_int)
+        elif isinstance(user, int):
+            playlist = playlist.filter_by(owner=user)
+
+        return playlist.count() or 0
+
+    @classmethod
+    def add_media(cls, playlist, media):
+        if None in [playlist, media]:
+            return False
+
+        playlist.media_list.append(media)
+        db.add(playlist)
+        db.commit()
+
+        return True
