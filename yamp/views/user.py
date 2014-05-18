@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, url_for, session, flash, redirect, render_template
+from flask import Blueprint, url_for, session, flash, redirect, render_template, request
 from yamp.helpers.oauth import google, GOOGLE_TOKEN_NAME
 from yamp.controllers.user import UserController
 from yamp.controllers.playlist import PlaylistController
@@ -26,6 +26,10 @@ def logout():
 
 @view.route('/oauth/google')
 def oauth_google():
+    next_url = request.args.get('next', None)
+    if next_url:
+        session['next'] = next_url
+
     return google.authorize(callback=url_for(
         'user.google_authorized',
         _external=True,
@@ -38,7 +42,10 @@ def google_authorized(response):
     if not response:
         return u'Failed to login using google OAuth'
 
-    next_url = url_for('main.index')
+    if 'next' in session:
+        next_url = session.pop('next')
+    else:
+        next_url = url_for('main.index')
     session[GOOGLE_TOKEN_NAME] = (response.get('access_token'), '')
 
     result = UserController.register_google(response)
