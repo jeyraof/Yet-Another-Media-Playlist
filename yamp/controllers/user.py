@@ -9,7 +9,7 @@ from yamp.models.user import User
 
 
 class UserController(BaseController):
-    u"""
+    """
     User Controller
     """
     @classmethod
