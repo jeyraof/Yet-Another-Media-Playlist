@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, url_for, session, flash, redirect, make_response
+from flask import Blueprint, url_for, session, flash, redirect, render_template
 from yamp.helpers.oauth import google, GOOGLE_TOKEN_NAME
 from yamp.controllers.user import UserController
 from yamp.controllers.playlist import PlaylistController
+from yamp.helpers.user import login_required
 
 view = Blueprint('user', __name__, url_prefix='/user')
 
@@ -64,3 +65,15 @@ def google_authorized(response):
         flash(result.get(u'msg'))
 
     return redirect(next_url)
+
+
+@view.route('/archived')
+@login_required
+def archived():
+    media_list = PlaylistController.get_archived_media()
+
+    opt = {
+        'media_list': media_list,
+    }
+
+    return render_template("user/archived.html", **opt)
