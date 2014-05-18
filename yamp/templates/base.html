@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}"/>
     {% block css %}{% endblock %}
 
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     {% block js %}{% endblock %}
 </head>
-<body>
+<body data-playlist="off">
     <div class="sidebar">
         <div class="inner">
             {% if not user %}
@@ -28,7 +30,7 @@
                     </a>
                     <div class="account">
                         <div class="id_str">
-                            <a href="#">@{{ user.id_str }}</a>
+                            <a href="#">+{{ user.id_str }}</a>
                         </div>
                         <span class="email">
                             <a href="#">{{ user.email }}</a>
@@ -37,6 +39,15 @@
                 </div>
 
                 <ul class="menu">
+                    <li>
+                        <a href="{{ url_for('main.index') }}">
+                            <span class="label">
+                                <i class="fa fa-home fa-fw"></i>
+                                Home
+                            </span>
+                        </a>
+                    </li>
+                    <li class="blank">&nbsp;</li>
                     <li>
                         <a href="{{ url_for('user.archived') }}">
                             <span class="label">
@@ -71,5 +82,11 @@
     <div class="content">
         {% block content %}{% endblock %}
     </div>
+    <div class="playlist">
+        <div class="inner">
+
+        </div>
+    </div>
+    <a class="playlist-swc" href="#"><i class="fa fa-bars"></i></a>
 </body>
 </html>
