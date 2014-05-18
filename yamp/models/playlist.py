@@ -3,6 +3,7 @@
 from sqlalchemy import Column, types, ForeignKey, Table
 from sqlalchemy.orm import relationship
 from sqlalchemy.ext.declarative.base import _declarative_constructor
+from sqlalchemy.sql.expression import func
 from yamp.models import Base, IntegerChoiceType, JSONEncodedDict
 from yamp.models.user import User
 from yamp.models.media import Media
@@ -26,6 +27,8 @@ class Playlist(Base):
     medias = relationship(u'Media',
                           secondary=playlist_media_association,
                           backref=u'playlist_list')
+
+    created_at = Column('created_at', types.DateTime, default=func.now())
 
     def __init__(self, **kwargs):
         if 'owner' in kwargs:
