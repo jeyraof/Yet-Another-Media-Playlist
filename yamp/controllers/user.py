@@ -6,6 +6,7 @@ from yamp.controllers import BaseController
 from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.user import User
+from yamp.models.playlist import Playlist
 
 
 class UserController(BaseController):
@@ -66,3 +67,15 @@ class UserController(BaseController):
         db.commit()
 
         return {u'ok': True, u'user': created_user, u'created': True}
+
+    @classmethod
+    def get_archived_playlist(cls, **kwargs):
+        playlist = db.query(Playlist)
+        user = kwargs.get('user', g.user)
+        if isinstance(user, User):
+            playlist = playlist.filter_by(owner=user.id_int)
+        elif isinstance(user, int):
+            playlist = playlist.filter_by(owner=user)
+
+        playlist = playlist.order_by('created_at').first()
+        return playlist
