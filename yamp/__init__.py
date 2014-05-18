@@ -17,3 +17,10 @@ def before_request():
 
     if 'id_int' in session:
         g.user = db.query(User).get(session['id_int'])
+
+
+@app.context_processor
+def context_processor():
+    return {
+        'user': g.user,
+    }
