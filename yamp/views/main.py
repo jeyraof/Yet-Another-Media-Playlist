@@ -11,7 +11,4 @@ def apply_view(app):
 
 @view.route('/')
 def index():
-    opt = {
-        'user': g.user,
-    }
-    return render_template('main/index.html', **opt)
+    return render_template('main/index.html')
