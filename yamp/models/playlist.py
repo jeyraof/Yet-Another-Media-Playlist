@@ -2,8 +2,11 @@
 
 from sqlalchemy import Column, types, ForeignKey, Table
 from sqlalchemy.orm import relationship
+from sqlalchemy.ext.declarative.base import _declarative_constructor
 from yamp.models import Base, IntegerChoiceType, JSONEncodedDict
+from yamp.models.user import User
 from yamp.models.media import Media
+# Media 는 Association 에서 쓰이므로 Unused 라고 지우지 말것.
 
 
 playlist_media_association = Table(u'playlist_media_assoc', Base.metadata,
@@ -23,3 +26,15 @@ class Playlist(Base):
     medias = relationship(u'Media',
                           secondary=playlist_media_association,
                           backref=u'playlist_list')
+
+    def __init__(self, **kwargs):
+        if 'owner' in kwargs:
+            user = kwargs.get('owner')
+            if isinstance(user, User):
+                self.owner = user.id_int
+            elif isinstance(user, int):
+                self.owner = user
+
+            del kwargs['owner']
+
+        _declarative_constructor(self, **kwargs)
