@@ -12,7 +12,8 @@ from yamp.models.media import Media
 
 playlist_media_association = Table(u'playlist_media_assoc', Base.metadata,
     Column('playlist_id', types.Integer, ForeignKey(u'playlist.id_int')),
-    Column('media_id', types.Integer, ForeignKey(u'media.id_int'))
+    Column('media_id', types.Integer, ForeignKey(u'media.id_int')),
+    Column('created_at', types.DateTime, default=func.now())
 )
 
 
@@ -24,9 +25,9 @@ class Playlist(Base):
     owner = Column('owner_id', types.Integer, ForeignKey(u'user.id_int'))
     limit = Column('limit', types.Integer, default=20)
 
-    medias = relationship(u'Media',
-                          secondary=playlist_media_association,
-                          backref=u'playlist_list')
+    media_list = relationship(u'Media',
+                              secondary=playlist_media_association,
+                              backref=u'playlist_list')
 
     created_at = Column('created_at', types.DateTime, default=func.now())
 
@@ -41,3 +42,7 @@ class Playlist(Base):
             del kwargs['owner']
 
         _declarative_constructor(self, **kwargs)
+
+    @property
+    def item_count(self):
+        return len(self.media_list)
