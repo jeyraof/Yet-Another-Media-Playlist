@@ -44,8 +44,10 @@ class PlaylistController(BaseController):
         user: owner of playlist (default: connected_user)
         """
         user = kwargs.get('user', g.user)
-        kwargs['user'] = user
-        kwargs['title'] = u'%s\'s Archived Media' % user.id_str
-        kwargs['limit'] = 0
+        params = {
+            'user': user,
+            'title': u'%s\'s Archived Media' % user.id_str,
+            'limmit': 0,
+        }
 
-        return cls.create(**kwargs)
+        return cls.create(**params)
