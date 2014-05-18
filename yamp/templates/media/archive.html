@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+    <form class="pure-form pure-form-aligned" method="post">
+        <fieldset>
+            <div class="pure-control-group">
+                <label for="address">Media address</label>
+                <input class="pure-input-1-2" id="address" type="text" name="address" placeholder="http://www.youtube.com/watch?v=0Oi8jDMvd_w">
+            </div>
+
+            <div class="pure-controls">
+                <button type="submit" class="pure-button pure-button-primary">Submit</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}
