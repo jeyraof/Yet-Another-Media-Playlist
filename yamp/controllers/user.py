@@ -79,3 +79,30 @@ class UserController(BaseController):
 
         playlist = playlist.order_by('created_at').first()
         return playlist
+
+    @classmethod
+    def get_archived_media(cls, **kwargs):
+        """
+        Parameters:
+        page: page number (integer, default=1)
+        """
+        user = kwargs.get('user', g.user)
+        if user:
+            playlist = cls.get_archived_playlist(user=user)
+        else:
+            playlist = cls.get_archived_playlist()
+
+        media_ea = 20
+        page = kwargs.get('page', 1)
+        media_f = -1 * media_ea * page
+        media_t = media_f + media_ea
+
+        media_list = []
+        if playlist:
+            if media_t == 0:
+                media_list = playlist.media_list[media_f:]
+            else:
+                media_list = playlist.media_list[media_f:media_t]
+
+        media_list.reverse()
+        return media_list

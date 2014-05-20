@@ -77,7 +77,7 @@ def google_authorized(response):
 @view.route('/archived')
 @login_required
 def archived():
-    media_list = PlaylistController.get_archived_media()
+    media_list = UserController.get_archived_media()
 
     opt = {
         'media_list': media_list,

@@ -3,6 +3,7 @@
 from hashlib import md5
 from flask import session, g
 from yamp.controllers import BaseController
+from yamp.controllers.newsfeed import NewsFeedController
 from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.playlist import Playlist
@@ -49,42 +50,11 @@ class PlaylistController(BaseController):
         params = {
             'user': user,
             'title': u'%s\'s Archived Media' % user.id_str,
+            'default': True,
             'limmit': 0,
         }
 
         return cls.create(**params)
-
-    @classmethod
-    def get_archived_media(cls, **kwargs):
-        """
-        Parameters:
-        user: owner of playlist
-        page: page number (integer, default=1)
-        """
-        playlist = db.query(Playlist)
-
-        user = kwargs.get('user', g.user)
-        if isinstance(user, User):
-            playlist = playlist.filter_by(owner=user.id_int)
-        elif isinstance(user, int):
-            playlist = playlist.filter_by(owner=user)
-
-        playlist = playlist.order_by('created_at').first()
-
-        media_ea = 20
-        page = kwargs.get('page', 1)
-        media_f = -1 * media_ea * page
-        media_t = media_f + media_ea
-
-        media_list = []
-        if playlist:
-            if media_t == 0:
-                media_list = playlist.media_list[media_f:]
-            else:
-                media_list = playlist.media_list[media_f:media_t]
-
-        media_list.reverse()
-        return media_list
 
     @classmethod
     def get_playlist_number(cls, **kwargs):
@@ -116,5 +86,9 @@ class PlaylistController(BaseController):
         playlist.media_list.append(media)
         db.add(playlist)
         db.commit()
+
+        NewsFeedController.create(news_type=1 if playlist.default else 2,
+                                  media=media,
+                                  playlist=playlist)
 
         return True

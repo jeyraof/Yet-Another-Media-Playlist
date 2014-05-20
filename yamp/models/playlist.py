@@ -23,6 +23,7 @@ class Playlist(Base):
     id_int = Column('id_int', types.Integer, nullable=False, primary_key=True, autoincrement=True)
     title = Column('title', types.Unicode(255), nullable=False, default=u'')
     owner = Column('owner_id', types.Integer, ForeignKey(u'user.id_int'))
+    default = Column('default', types.Boolean, default=False)
     limit = Column('limit', types.Integer, default=20)
 
     media_list = relationship(u'Media',
