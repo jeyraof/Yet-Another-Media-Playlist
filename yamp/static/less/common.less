@@ -1,5 +1,6 @@
 // Constant
 @sidebar-size: 290px;
+@sidebar-inner: @sidebar-size - 20px;
 
 body {
   background: #1fa67a;
@@ -183,11 +184,29 @@ div.playlist {
 
   .inner {
     position: relative;
-    width: @sidebar-size - 21px;
+    width: @sidebar-inner;
     padding: 0 10px;
     height: 100%;
     border-left: 1px solid #ffffff;
     overflow-y: scroll;
+
+    .player {
+      position: absolute;
+      overflow: hidden;
+      width: inherit;
+      height: 150px;
+      top: 40px;
+    }
+
+    .playlist-item {
+      position: absolute;
+      width: inherit;
+      background: blue;
+      top: 200px;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
   }
 }
 
