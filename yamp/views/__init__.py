@@ -2,6 +2,7 @@
 __author__ = 'Jaeyoung'
 
 __all__ = [
+    'newsfeed',
     'playlist',
     'media',
     'user',

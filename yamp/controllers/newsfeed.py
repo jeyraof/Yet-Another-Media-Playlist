@@ -41,6 +41,7 @@ class NewsFeedController(BaseController):
             u'user': {
                 u'id_int': user.id_int,
                 u'id_str': user.id_str,
+                u'picture': user.picture,
             },
             u'media': {
                 u'id_int': media.id_int,
@@ -60,3 +61,12 @@ class NewsFeedController(BaseController):
         db.commit()
 
         return {u'ok': True}
+
+    @classmethod
+    def get_newsfeed(cls, id_int):
+        if id_int:
+            news_feed = db.query(NewsFeed).filter(NewsFeed.id_int > id_int).order_by('-created_at')
+        else:
+            news_feed = db.query(NewsFeed).order_by('-created_at')[:20]
+
+        return news_feed

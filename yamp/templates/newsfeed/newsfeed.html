@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    {% for news_feed in news_feed_list %}
+    <div class="newsfeed" data-id-int="{{ news_feed.id_int }}">
+        <div class="inner">
+            <div class="meta">
+                <a class="thumbnail" href="#">
+                    <img src="{{ news_feed.user.picture }}">
+                </a>
+                <div class="text">
+                    <a class="id_str" href="#">{{ news_feed.user.id_str }}</a>
+                    <a class="date" href="#">{{ news_feed.created_at }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+{% endblock %}
