@@ -31,8 +31,9 @@ class PlaylistController(BaseController):
             return {u'ok': False, u'msg': u'title was required'}
 
         limit = kwargs.get('limit', 20)
+        default = kwargs.get('default', False)
 
-        created_playlist = Playlist(title=title, owner=user, limit=limit)
+        created_playlist = Playlist(title=title, owner=user, limit=limit, default=default)
         db.add(created_playlist)
         db.commit()
 

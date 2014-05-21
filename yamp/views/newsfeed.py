@@ -14,7 +14,9 @@ def apply_view(app):
 @view.route('/')
 def get_newsfeed():
     id_int = request.args.get('id_int', None)
-    news_feed_list = NewsFeedController.get_newsfeed(id_int=id_int)
+    age = request.args.get('age', 'new')
+
+    news_feed_list = NewsFeedController.get_newsfeed(id_int=id_int, age=age)
 
     return render_template('newsfeed/newsfeed.html',
                            news_feed_list=news_feed_list)

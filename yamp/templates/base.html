@@ -40,7 +40,7 @@
 
                 <ul class="menu">
                     <li>
-                        <a href="{{ url_for('main.index') }}">
+                        <a href="{{ url_for('newsfeed.get_newsfeed') }}" data-ajax=".content">
                             <span class="label">
                                 <i class="fa fa-home fa-fw"></i>
                                 Home
@@ -93,5 +93,7 @@
         </div>
     </div>
     <a class="playlist-swc" href="#"><i class="fa fa-bars"></i></a>
+
+    <script>get_newsfeed(0, 'append');</script>
 </body>
 </html>
