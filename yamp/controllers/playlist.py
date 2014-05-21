@@ -1,10 +1,8 @@
 # -*- coding: utf-8 -*-
 
-from hashlib import md5
-from flask import session, g
+from flask import g
 from yamp.controllers import BaseController
 from yamp.controllers.newsfeed import NewsFeedController
-from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.playlist import Playlist
 from yamp.models.media import Media
