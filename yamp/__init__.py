@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from flask import session, g
 from importlib import import_module
+from datetime import datetime
 from yamp import views
 from yamp.app import app, db
 from yamp.models.user import User
@@ -30,6 +31,7 @@ def context_processor():
         'user': g.user,
         'archived_playlist': UserController.get_archived_playlist(),
         'playlist_number': PlaylistController.get_playlist_number(),
+        'today': datetime.now().replace(microsecond=0),
     }
 
 
