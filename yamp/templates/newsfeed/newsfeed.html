@@ -6,8 +6,10 @@
                 <img src="{{ news_feed.user.picture }}">
             </a>
             <div class="text">
-                <a class="id_str" href="#">{{ news_feed.user.id_str }}</a>
-                <a class="date" href="#">{{ news_feed.created_at }}</a>
+                <span class="id_str">
+                    <a href="#">{{ news_feed.user.id_str }}</a>
+                </span>
+                <a class="date" href="#">{{ news_feed.created_at }} {{ news_feed.id_int }}</a>
             </div>
         </div>
     </div>
