@@ -63,13 +63,20 @@ class NewsFeedController(BaseController):
         return {u'ok': True}
 
     @classmethod
-    def get_newsfeed(cls, id_int, age):
-        news_feed = db.query(NewsFeed).order_by('-created_at')
-        if id_int:
-            if age == 'new':
-                news_feed = news_feed.filter(NewsFeed.id_int > id_int)
-            else:
-                news_feed = news_feed.filter(NewsFeed.id_int < id_int)[:10]
+    def get_newsfeed_new(cls, id_int):
+        news_feed = db.query(NewsFeed).order_by(NewsFeed.id_int.desc())
+        if id_int > 0:
+            news_feed = news_feed.filter(NewsFeed.id_int > id_int)
+        else:
+            news_feed = news_feed[:10]
+
+        return news_feed
+
+    @classmethod
+    def get_newsfeed_old(cls, id_int):
+        news_feed = db.query(NewsFeed).order_by(NewsFeed.id_int.desc())
+        if id_int > 0:
+            news_feed = news_feed.filter(NewsFeed.id_int < id_int)[:10]
         else:
             news_feed = news_feed[:10]
 
