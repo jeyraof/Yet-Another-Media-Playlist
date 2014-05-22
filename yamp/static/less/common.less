@@ -234,7 +234,18 @@ body[data-playlist="on"] {
 
 //
 
-.newsfeed {
+.content-header {
+
+  .newsfeed-more {
+    padding: 10px 10px 0;
+
+    a {
+
+    }
+  }
+}
+
+.advertise, .newsfeed {
   padding: 10px 10px 0;
 
   .inner {
@@ -242,7 +253,6 @@ body[data-playlist="on"] {
     padding: 10px;
     border-radius: 3px;
     border: 1px solid #54926d;
-
     color: #000000;
 
     div.meta {
@@ -264,12 +274,18 @@ body[data-playlist="on"] {
 
       .text {
         height: 40px;
+
         .id_str {
           display: block;
           font-size: 14px;
           line-height: 20px;
-          font-weight: bold;
-          color: #54926d;
+
+          a {
+            line-height: inherit;
+            font-size: inherit;
+            font-weight: bold;
+            color: #54926d;
+          }
         }
 
         .date {

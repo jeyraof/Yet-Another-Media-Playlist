@@ -2,13 +2,28 @@ var NEWSFEED_MAX = 0;
 var NEWSFEED_MIN = 0;
 
 function get_newsfeed(id_int, mode) {
+  var url = '/newsfeed/?id_int='+id_int;
+  if (mode === 'prepend') {
+    url = url + '&mode=new';
+  } else if (mode === 'append') {
+    url = url + '&mode=old';
+  }
+
+  ajax_call(url, '.content-middle', mode);
+
+  var $newsfeed = $('.newsfeed');
+  NEWSFEED_MAX = $newsfeed.first().data('id-int');
+  NEWSFEED_MIN = $newsfeed.last().data('id-int');
+}
+
+function ajax_call(url, selector, mode) {
   $.ajax({
-    url: '/newsfeed/?id_int='+id_int,
+    url: url,
     async: false,
     type: 'GET',
     dataType: 'html',
     success: function (data) {
-      $obj = $('.content');
+      $obj = $(selector);
       if (mode === 'append') {
         $obj.append(data);
       } else if (mode === 'prepend') {
@@ -18,26 +33,6 @@ function get_newsfeed(id_int, mode) {
       }
     }
   });
-
-  var $newsfeed = $('.newsfeed');
-  NEWSFEED_MAX = $newsfeed.first().data('id-int');
-  NEWSFEED_MIN = $newsfeed.last().data('id-int');
-}
-
-function ajax_call(url, selector, mode) {
-  $.get(url,
-    {},
-    function (data) {
-      $obj = $(selector);
-      if (mode === 'append') {
-        $obj.append(data);
-      } else if (mode === 'prepend') {
-        $obj.prepend(data);
-      } else {
-        $obj.html(data);
-      }
-    },
-  'html');
 }
 
 $(document).ready(function() {
