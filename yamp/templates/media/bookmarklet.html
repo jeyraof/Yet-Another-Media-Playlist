@@ -64,7 +64,7 @@
                             <img src="{{ result.info.thumbnail }}">
                         </div>
                         <span class="title">{{ result.info.title }}</span>
-                        <span class="duration">{{ result.info.duration }} sec.</span>
+                        <span class="duration">{{ result.info.duration|pretty_duration }}</span>
                         <form method="post">
                             <input type="hidden" name="address" value="{{ address }}"/>
                             <div>

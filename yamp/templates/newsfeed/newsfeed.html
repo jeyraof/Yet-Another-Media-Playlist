@@ -11,7 +11,7 @@
                     <span>
                         {% if news_feed.news_type == 'archive' %}
                             archived
-                            <a href="#">{{ news_feed.media.title }} ({{ news_feed.media.duration }})</a>
+                            <a href="#">{{ news_feed.media.title }} ({{ news_feed.media.duration|pretty_duration }})</a>
                         {% elif news_feed.news_type == 'add' %}
                             add
                             <a href="#">{{ news_feed.media.title }}</a>
