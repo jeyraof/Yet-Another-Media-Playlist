@@ -13,6 +13,7 @@ class NewsFeed(Base):
                        IntegerChoiceType(choices=[
                            (1, 'archive'),
                            (2, 'add'),
+                           (3, 'join'),
                        ]),
                        nullable=False, default=0, index=True)
     data = Column('data', JSONEncodedDict, nullable=True, default=u'')

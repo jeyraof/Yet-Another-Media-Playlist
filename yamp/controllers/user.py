@@ -7,6 +7,7 @@ from yamp.helpers.oauth import GoogleAPI
 from yamp.app import db
 from yamp.models.user import User
 from yamp.models.playlist import Playlist
+from yamp.models.newsfeed import NewsFeed
 
 
 class UserController(BaseController):
@@ -62,7 +63,16 @@ class UserController(BaseController):
                             email=user_email,
                             password=user_pw,
                             picture=user_pic)
-        db.add(created_user)
+
+        created_feed = NewsFeed(news_type=(3,),
+                                data={
+                                    u'user': {
+                                        u'picture': user_pic,
+                                        u'id_int': created_user.id_int,
+                                        u'id_str': user_id,
+                                    }
+                                })
+        db.add(created_user, created_feed)
         db.commit()
 
         return {u'ok': True, u'user': created_user, u'created': True}
