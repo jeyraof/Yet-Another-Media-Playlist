@@ -40,3 +40,40 @@ def context_processor():
 @app.template_filter()
 def int_with_comma(n):
     return format(n, ',d')
+
+
+@app.template_filter()
+def pretty_duration(sec):
+    try:
+        sec = int(sec)
+        result = ''
+
+        days = sec / 86400
+        sec -= 86400*days
+        if days > 0:
+            result += ' %sday' % days
+            if days > 1:
+                result += 's'
+
+        hrs = sec / 3600
+        sec -= 3600*hrs
+        if hrs > 0:
+            result += ' %shr' % hrs
+            if hrs > 1:
+                result += 's'
+
+        mins = sec / 60
+        sec -= 60*mins
+        if mins > 0:
+            result += ' %smin' % mins
+            if mins > 1:
+                result += 's'
+
+        if sec > 0:
+            result += ' %ssec' % sec
+            if sec > 1:
+                result += 's'
+
+        return result.strip()
+    except:
+        return '0'
