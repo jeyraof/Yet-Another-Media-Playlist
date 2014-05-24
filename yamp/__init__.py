@@ -19,6 +19,7 @@ for view_name in views.__all__:
 def before_request():
     session.permanent = True
     g.user = None
+    db.commit()
 
     if 'id_int' in session:
         g.user = db.query(User).get(session['id_int'])
