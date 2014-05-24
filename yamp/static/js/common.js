@@ -17,8 +17,19 @@ function get_newsfeed(id_int, mode) {
   ajax_call(url, '.content-middle', mode);
 
   var $newsfeed = $('.newsfeed');
-  NEWSFEED_MAX = $newsfeed.first().data('id-int');
-  NEWSFEED_MIN = $newsfeed.last().data('id-int');
+  var NEWSFEED_MAX_NEW = parseInt($newsfeed.first().data('id-int'));
+  var NEWSFEED_MIN_NEW = parseInt($newsfeed.last().data('id-int'));
+
+  if (NEWSFEED_MAX_NEW === NEWSFEED_MAX || NEWSFEED_MIN_NEW === NEWSFEED_MIN) {
+    if (mode === 'prepend') {
+      alert('No more recent feed!');
+    } else if (mode === 'append') {
+      alert('No more old feed!');
+    }
+  }
+
+  NEWSFEED_MAX = NEWSFEED_MAX_NEW;
+  NEWSFEED_MIN = NEWSFEED_MIN_NEW;
 }
 
 function ajax_call(url, selector, mode) {
