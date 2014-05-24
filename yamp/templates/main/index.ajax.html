@@ -29,4 +29,9 @@
     </div>
 </div>
 
-<script>get_newsfeed(0, '');</script>
+<script>
+    var request_hash = window.location.hash;
+    if (!request_hash || request_hash === '#/') {
+      get_newsfeed(0, '');
+    }
+</script>

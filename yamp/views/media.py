@@ -4,7 +4,7 @@ from flask import Blueprint, url_for, session, flash, redirect, render_template,
 from yamp.controllers.user import UserController
 from yamp.controllers.media import MediaController
 from yamp.controllers.playlist import PlaylistController
-from yamp.helpers.user import login_required
+from yamp.helpers.user import disable_if_not_active
 
 view = Blueprint('media', __name__, url_prefix='/media')
 
@@ -19,6 +19,7 @@ def media():
 
 
 @view.route('/archive', methods=['GET', 'POST'])
+@disable_if_not_active
 def archive():
     if request.method == 'GET':
         return render_template("media/archive.html")

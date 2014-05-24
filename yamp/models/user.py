@@ -17,3 +17,9 @@ class User(Base):
     active = Column('active', types.Boolean, default=False)
 
     joined_at = Column('joined_at', types.DateTime, nullable=False, default=func.now(), index=True)
+
+    @property
+    def is_active(self):
+        if self.active:
+            return True
+        return False

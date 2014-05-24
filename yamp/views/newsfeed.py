@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, url_for, session, flash, redirect, render_template, request
+from flask import Blueprint, render_template, request
 from yamp.controllers.newsfeed import NewsFeedController
-from yamp.helpers.user import login_required
 
 view = Blueprint('newsfeed', __name__, url_prefix='/newsfeed')
 
