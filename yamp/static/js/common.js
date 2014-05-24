@@ -58,4 +58,15 @@ $(document).ready(function() {
     $body.attr('data-playlist', flag);
     return false;
   });
+
+  $('a.load-newsfeed').click(function() {
+    var dir = $(this).data('dir');
+    if (dir === 'new') {
+      get_newsfeed(NEWSFEED_MAX, 'prepend');
+    } else if (dir === 'old') {
+      get_newsfeed(NEWSFEED_MIN, 'append');
+    }
+
+    return false;
+  });
 });

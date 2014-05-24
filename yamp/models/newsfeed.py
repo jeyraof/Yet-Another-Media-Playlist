@@ -9,12 +9,12 @@ class NewsFeed(Base):
     __tablename__ = u'newsfeed'
 
     id_int = Column('id_int', types.Integer, nullable=False, primary_key=True, autoincrement=True)
-    media_type = Column('news_type',
-                        IntegerChoiceType(choices=[
-                            (1, 'archived'),
-                            (2, 'append'),
-                        ]),
-                        nullable=False, default=0, index=True)
+    news_type = Column('news_type',
+                       IntegerChoiceType(choices=[
+                           (1, 'archive'),
+                           (2, 'add'),
+                       ]),
+                       nullable=False, default=0, index=True)
     data = Column('data', JSONEncodedDict, nullable=True, default=u'')
 
     created_at = Column('created_at', types.DateTime, default=func.now())

@@ -8,6 +8,17 @@
             <div class="text">
                 <span class="id_str">
                     <a href="#">{{ news_feed.user.id_str }}</a>
+                    <span>
+                        {% if news_feed.news_type == 'archive' %}
+                            archived
+                            <a href="#">{{ news_feed.media.title }} ({{ news_feed.media.duration }})</a>
+                        {% elif news_feed.news_type == 'add' %}
+                            add
+                            <a href="#">{{ news_feed.media.title }}</a>
+                            to
+                            <a href="#">{{ news_feed.playlist.title }}</a>
+                        {% endif %}
+                    </span>
                 </span>
                 <a class="date" href="#">{{ news_feed.created_at }} {{ news_feed.id_int }}</a>
             </div>

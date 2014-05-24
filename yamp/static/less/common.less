@@ -234,14 +234,20 @@ body[data-playlist="on"] {
 
 //
 
-.content-header {
 
-  .newsfeed-more {
-    padding: 10px 10px 0;
+.newsfeed-more {
+  padding: 10px 10px 0;
 
-    a {
+  a {
+    display: block;
+    text-align: center;
 
-    }
+    padding: 10px;
+    border-radius: 3px;
+    color: #000000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background: #157254;
   }
 }
 
@@ -285,6 +291,15 @@ body[data-playlist="on"] {
             font-size: inherit;
             font-weight: bold;
             color: #54926d;
+          }
+
+          span a {
+            color: #47a7ff;
+            font-weight: normal;
+
+            &:hover {
+              text-decoration: underline;
+            }
           }
         }
 
