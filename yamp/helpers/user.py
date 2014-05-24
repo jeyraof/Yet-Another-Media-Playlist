@@ -18,8 +18,12 @@ def login_required(f):
 def disable_if_not_active(f):
     @wraps(f)
     def return_func(*args, **kwargs):
-        if g.user and g.user.active:
-            return f(*args, **kwargs)
+        if g.user:
+            if g.user.active:
+                return f(*args, **kwargs)
+            else:
+                return "<p>You don't have permission!</p>" \
+                       "<p>Request permission to <a href='https://twitter.com/jeyraof' target='_blank'>@jeyraof</a></p>"
 
-        return 'login required!'
+        return "<p>Sign in required!</p>"
     return return_func
