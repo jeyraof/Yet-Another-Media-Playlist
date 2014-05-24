@@ -11,7 +11,8 @@ app.config.from_pyfile(os.path.join(path, '..', 'config.cfg'))
 app.secret_key = app.config.get('SECRET_KEY')
 
 engine = create_engine(app.config.get('DB_URI'))
-db = scoped_session(sessionmaker(autocommit=False, autoflush=False, bind=engine))
+maker = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+db = scoped_session(maker)
 
 
 @event.listens_for(engine, 'connect')

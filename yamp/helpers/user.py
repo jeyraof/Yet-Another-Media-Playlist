@@ -18,7 +18,7 @@ def login_required(f):
 def disable_if_not_active(f):
     @wraps(f)
     def return_func(*args, **kwargs):
-        if g.user and g.user.is_active:
+        if g.user and g.user.active:
             return f(*args, **kwargs)
 
         return 'login required!'
