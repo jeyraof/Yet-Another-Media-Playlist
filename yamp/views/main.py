@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, render_template, session, g
+from flask import Blueprint, render_template, request
 
 view = Blueprint('main', __name__)
 
@@ -11,4 +11,9 @@ def apply_view(app):
 
 @view.route('/')
 def index():
-    return render_template('main/index.html')
+    if request.is_xhr:
+        _template = 'main/index.ajax.html'
+    else:
+        _template = 'main/index.html'
+
+    return render_template(_template)

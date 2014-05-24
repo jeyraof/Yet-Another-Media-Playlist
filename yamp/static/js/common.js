@@ -38,6 +38,7 @@ function ajax_call(url, selector, mode) {
 $(document).ready(function() {
   var $body = $('body');
 
+  // xhr call
   $body.on('click', 'a', function() {
     $anchor = $(this);
     var url = $anchor.attr('href');
@@ -53,20 +54,21 @@ $(document).ready(function() {
 
   });
 
-  $('a.playlist-swc').click(function() {
-    var flag = $body.attr('data-playlist') === 'on' ? 'off' : 'on';
-    $body.attr('data-playlist', flag);
-    return false;
-  });
-
-  $('a.load-newsfeed').click(function() {
+  // load newsfeed
+  $body.on('click', 'a.load-newsfeed', function() {
     var dir = $(this).data('dir');
     if (dir === 'new') {
       get_newsfeed(NEWSFEED_MAX, 'prepend');
     } else if (dir === 'old') {
       get_newsfeed(NEWSFEED_MIN, 'append');
     }
+    return false;
+  });
 
+
+  $('a.playlist-swc').click(function() {
+    var flag = $body.attr('data-playlist') === 'on' ? 'off' : 'on';
+    $body.attr('data-playlist', flag);
     return false;
   });
 });

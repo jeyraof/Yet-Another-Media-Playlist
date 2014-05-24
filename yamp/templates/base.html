@@ -40,7 +40,7 @@
 
                 <ul class="menu">
                     <li>
-                        <a href="{{ url_for('newsfeed.get_newsfeed') }}" data-ajax=".content">
+                        <a href="{{ url_for('main.index') }}" data-ajax=".content">
                             <span class="label">
                                 <i class="fa fa-home fa-fw"></i>
                                 Home
@@ -80,36 +80,8 @@
         </div>
     </div>
     <div class="content">
-        <div class="content-header">
-{#            <div class="advertise">#}
-{#                <div class="inner">#}
-{#                    <div class="meta">#}
-{#                        <a class="thumbnail" href="#">#}
-{#                            <img src="https://lh4.googleusercontent.com/-UbmcJUkl-vw/AAAAAAAAAAI/AAAAAAAAAQU/g6FbmQRalys/photo.jpg">#}
-{#                        </a>#}
-{#                        <div class="text">#}
-{#                            <span class="id_str">#}
-{#                                <a href="#">jaeyoung</a>#}
-{#                                <span>가 생각하기에 이 아랫놈이 그렇게 도움되는것 같습니다.</span>#}
-{#                            </span>#}
-{#                            <a class="date" href="#">{{ today }}</a>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#            </div>#}
-
-            <div class="newsfeed-more">
-                <a href="#" class="load-newsfeed" data-dir="new">Load more articles...</a>
-            </div>
-        </div>
-        <div class="content-middle">
-        {% block content %}{% endblock %}
-        </div>
-        <div class="content-footer">
-            <div class="newsfeed-more">
-                <a href="#" class="load-newsfeed" data-dir="old">Load more articles...</a>
-            </div>
-        </div>
+        {% block content %}
+        {% endblock %}
     </div>
     <div class="playlist">
         <div class="inner">
@@ -122,7 +94,5 @@
         </div>
     </div>
     <a class="playlist-swc" href="#"><i class="fa fa-bars"></i></a>
-
-    <script>get_newsfeed(0, '');</script>
 </body>
 </html>
