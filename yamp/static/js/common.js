@@ -1,6 +1,11 @@
 var NEWSFEED_MAX = 0;
 var NEWSFEED_MIN = 0;
 
+function retrieve_hash_page() {
+  var url = window.location.hash ? window.location.hash.substring(1) : '/';
+  ajax_call(url, '.content', 'replace');
+}
+
 function get_newsfeed(id_int, mode) {
   var url = '/newsfeed/?id_int='+id_int;
   if (mode === 'prepend') {
@@ -37,22 +42,13 @@ function ajax_call(url, selector, mode) {
 
 $(document).ready(function() {
   var $body = $('body');
+  var hash = window.location.hash;
+  if (hash) {
+    retrieve_hash_page();
+  }
 
-  // xhr call
-  $body.on('click', 'a', function() {
-    $anchor = $(this);
-    var url = $anchor.attr('href');
-    var dom = $anchor.data('ajax');
-    dom = dom ? dom : '';
-
-    if (dom.length > 0) {
-      ajax_call(url, dom, 'replace');
-      return false;
-    } else {
-      return true;
-    }
-
-  });
+  // hash change
+  $(window).on('hashchange', retrieve_hash_page);
 
   // load newsfeed
   $body.on('click', 'a.load-newsfeed', function() {
