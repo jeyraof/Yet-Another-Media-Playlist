@@ -40,7 +40,7 @@
 
                 <ul class="menu">
                     <li>
-                        <a href="#{{ url_for('main.index') }}" data-ajax=".content">
+                        <a href="#{{ url_for('main.index') }}">
                             <span class="label">
                                 <i class="fa fa-home fa-fw"></i>
                                 Home
@@ -80,8 +80,7 @@
         </div>
     </div>
     <div class="content">
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </div>
     <div class="playlist">
         <div class="inner">

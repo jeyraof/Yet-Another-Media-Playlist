@@ -42,10 +42,10 @@ function ajax_call(url, selector, mode) {
 
 $(document).ready(function() {
   var $body = $('body');
+
+  // initial page load
   var hash = window.location.hash;
-  if (hash) {
-    retrieve_hash_page();
-  }
+  if (hash) retrieve_hash_page();
 
   // hash change
   $(window).on('hashchange', retrieve_hash_page);
@@ -61,8 +61,8 @@ $(document).ready(function() {
     return false;
   });
 
-
-  $('a.playlist-swc').click(function() {
+  // toggle playlist
+  $body.on('click', 'a.playlist-swc', function() {
     var flag = $body.attr('data-playlist') === 'on' ? 'off' : 'on';
     $body.attr('data-playlist', flag);
     return false;
