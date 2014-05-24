@@ -20,15 +20,10 @@ function get_newsfeed(id_int, mode) {
   var NEWSFEED_MAX_NEW = parseInt($newsfeed.first().data('id-int'));
   var NEWSFEED_MIN_NEW = parseInt($newsfeed.last().data('id-int'));
 
-  if (NEWSFEED_MAX_NEW === NEWSFEED_MAX || NEWSFEED_MIN_NEW === NEWSFEED_MIN) {
-    if (mode === 'prepend') {
-      alert('No more recent feed!');
-    } else if (mode === 'append') {
-      alert('No more old feed!');
-    }
-  }
-
+  if (NEWSFEED_MAX_NEW === NEWSFEED_MAX && mode === 'prepend') alert('No more recent feed!');
   NEWSFEED_MAX = NEWSFEED_MAX_NEW;
+
+  if (NEWSFEED_MIN_NEW === NEWSFEED_MIN && mode === 'append') alert('No more old feed!');
   NEWSFEED_MIN = NEWSFEED_MIN_NEW;
 }
 
