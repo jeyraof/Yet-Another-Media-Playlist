@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add to yamp</title>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bookmarklet.css') }}"/>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script>
+        function closeIframe() {parent.window.postMessage('destroy_bookmarklet', '*');}
+        function countDown() {
+            var remains_dom = document.getElementsByClassName('time');
+            if (remains_dom.length > 0) remains_dom = remains_dom[0];
+
+            var remains = parseInt(remains_dom.textContent);
+            if (remains > 0) {
+                remains_dom.textContent = remains - 1;
+                return false;
+            } else {
+                return true;
+            }
+        }
+    </script>
+</head>
+<body>
+<div class="wrapper">
+    <div class="central">
+        {% if done %}
+            <div class="desc">
+                <p>Archiving was Successful!</p>
+                <p>This dialog would be closed in <span class="time">3</span> seconds.</p>
+
+                <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+                <script>setInterval(function() {if (countDown()) closeIframe();}, 1000);</script>
+            </div>
+        {% elif fail %}
+            <div class="desc">
+                <p>Failed to archive.</p>
+                <p>Please report this url for <a href="https://twitter.com/jeyraof">@jeyraof</a></p>
+
+                <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+            </div>
+        {% else %}
+            {% if not is_login %}
+                <a class="login-button" href="{{ url_for('user.oauth_google', next=url_for('media.bookmarklet', url=address)) }}">
+                    <img src="https://developers.google.com/+/images/branding/sign-in-buttons/Red-signin_Long_base_44dp.png">
+                </a>
+                <div class="desc">
+                    <p>Sign in required.</p>
+
+                    <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+                </div>
+            {% elif not is_active %}
+                <div class="desc">
+                    <p>You don't have permission.</p>
+                    <p>Request permission to <a href="https://twitter.com/jeyraof">@jeyraof</a>.</p>
+
+                    <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+                </div>
+            {% else %}
+                <div class="desc">
+                    {% if result.ok %}
+                        <div class="thumb">
+                            <img src="{{ result.info.thumbnail }}">
+                        </div>
+                        <span class="title">{{ result.info.title }}</span>
+                        <span class="duration">{{ result.info.duration }} sec.</span>
+                        <form method="post">
+                            <input type="hidden" name="address" value="{{ address }}"/>
+                            <div>
+                                <button type="submit" class="archive">Archive</button>
+                            </div>
+                        </form>
+
+                        <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+                    {% else %}
+                        <p>Cannot archive this media.</p>
+                        <p>Please use another contents.</p>
+
+                        <a class="cancel" href="javascript:closeIframe();">Cancel</a>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+</body>
+</html>

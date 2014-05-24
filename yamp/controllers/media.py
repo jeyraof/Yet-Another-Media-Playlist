@@ -68,11 +68,15 @@ class MediaController(BaseController):
             media_type = 1
             media_query = urlparse(url=address).query
 
-            for media_query_once in media_query.split(u'&'):
-                [media_query_key, media_query_val] = media_query_once.split(u'=')
-                if media_query_key == u'v':
-                    id_str = media_query_val
-                    break
+            if u'v=' in media_query:
+                for media_query_once in media_query.split(u'&'):
+
+                    [media_query_key, media_query_val] = media_query_once.split(u'=')
+                    if media_query_key == u'v':
+                        id_str = media_query_val
+                        break
+            else:
+                media_type = 0
 
         return media_type, id_str
 

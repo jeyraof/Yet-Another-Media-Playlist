@@ -55,7 +55,7 @@ class NewsFeedController(BaseController):
             },
         }
 
-        created_news_feed = NewsFeed(media_type=(news_type, ),
+        created_news_feed = NewsFeed(news_type=(news_type, ),
                                      data=param)
         db.add(created_news_feed)
         db.commit()
