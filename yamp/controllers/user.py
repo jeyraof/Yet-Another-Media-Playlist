@@ -16,7 +16,6 @@ class UserController(BaseController):
     @classmethod
     def login(cls, user_info, password=u''):
         if isinstance(user_info, User):
-            db.commit()
             # user_info 가 User 객체인경우
             session['id_str'] = user_info.id_str
             session['id_int'] = user_info.id_int
