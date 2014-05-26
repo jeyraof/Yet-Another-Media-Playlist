@@ -19,7 +19,7 @@ for view_name in views.__all__:
 def before_request():
     session.permanent = True
     g.user = None
-    db.commit()
+    #db.commit()
 
     if 'id_int' in session:
         g.user = db.query(User).get(session['id_int'])
@@ -35,6 +35,10 @@ def context_processor():
         'today': datetime.now().replace(microsecond=0),
     }
 
+@app.teardown_request
+def cleanup_db_session(exc=None):
+    _exc = exc
+    db.remove()
 
 # Custom filters
 @app.template_filter()
