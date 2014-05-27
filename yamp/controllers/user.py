@@ -72,7 +72,8 @@ class UserController(BaseController):
                                         u'id_str': user_id,
                                     }
                                 })
-        db.add(created_user, created_feed)
+        db.add(created_user)
+        db.add(created_feed)
         db.commit()
 
         return {u'ok': True, u'user': created_user, u'created': True}
