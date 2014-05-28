@@ -172,30 +172,27 @@ div.content {
 }
 
 div.playlist {
-  position: absolute;
+  position: fixed;
   top: 0;
-  right: -@sidebar-size;
+  right: 0;
   bottom: 0;
-
   width: @sidebar-size;
-  background: #ffffff;
-  border-left: 1px solid #34a782;
-  overflow-x: hidden;
 
   .inner {
     position: relative;
     width: @sidebar-inner;
-    padding: 0 10px;
     height: 100%;
-    border-left: 1px solid #ffffff;
-    overflow-y: scroll;
+    padding: 0 10px;
 
     .player {
       position: absolute;
       overflow: hidden;
       width: inherit;
       height: 150px;
-      top: 40px;
+      top: 10px;
+
+      background: #ffffff;
+//      border-radius: 3px;
     }
 
     .playlist-item {
@@ -206,6 +203,46 @@ div.playlist {
       bottom: 0;
       overflow-x: hidden;
       overflow-y: scroll;
+    }
+  }
+}
+
+.remote {
+  position: absolute;
+  width: @sidebar-inner;
+  top: 170px;
+  right: 10px;
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+  border-radius: 3px;
+
+  list-style: none;
+  overflow: hidden;
+
+  li {
+    float: left;
+    width: 25%;
+    text-align: center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #d2d2d2;
+    }
+
+    a {
+      display: block;
+      line-height: 30px;
+      font-size: 15px;
+
+      &:hover {
+        color: #ffffff;
+      }
+
+      i {
+        font-size: inherit;
+      }
     }
   }
 }
@@ -227,10 +264,10 @@ a.playlist-swc {
   }
 }
 
-body[data-playlist="on"] {
-  div.playlist {position:fixed;right:0;}
-  a.playlist-swc {color: #1fa67a;}
-}
+//body[data-playlist="on"] {
+//  div.playlist {position:fixed;right:0;}
+//  a.playlist-swc {color: #1fa67a;}
+//}
 
 //
 
