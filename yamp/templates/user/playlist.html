@@ -1,0 +1,26 @@
+<div class="content-playlist">
+    <div class="user-info">
+        <span class="profile">
+            <img src="{{ requested_user.picture }}" alt="profile"/>
+        </span>
+        <div class="text">
+            <h1>
+                <a href="#{{ url_for('user.playlist', id_int=requested_user.id_int) }}" class="id_str">+{{ requested_user.id_str }}</a>'s all of playlist
+            </h1>
+        </div>
+    </div>
+
+    <div class="all-playlist">
+        <ul>
+            {% for playlist in all_playlist %}
+                <li class="playlist-item {% if not loop.first %}top-border{% endif %}">
+                    <a href="#">
+                        <span class="icon">{% if loop.first %}<i class="fa fa-star-o fa-fw"></i>{% endif %}</span>
+                        <span class="count">{{ playlist.item_count }}</span>
+                        <span class="title">{{ playlist.title }}</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
