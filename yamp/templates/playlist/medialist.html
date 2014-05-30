@@ -1,0 +1,28 @@
+<div class="content-playlist">
+    <div class="playlist-info">
+        <div class="meta">
+            <h1 class="title">{{ playlist.title }}</h1>
+        </div>
+        <div class="buttons">
+            <a href="#" class="pure-button pure-button-primary">Play</a>
+        </div>
+    </div>
+
+    <div class="all-media-list">
+        <ul>
+            {% for media in media_list %}
+                <li class="media-item {% if not loop.first %}top-border{% endif %}">
+                    <span class="icon">
+                        <i class="fa fa-fw
+                            {% if media.media_type == 'youtube' %}
+                                fa-youtube-play
+                            {% endif %}
+                        "></i>
+                    </span>
+                    <span class="duration">{{ media.duration|pretty_duration }}</span>
+                    <span class="title">{{ media.title }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
