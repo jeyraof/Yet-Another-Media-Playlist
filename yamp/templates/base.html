@@ -30,10 +30,10 @@
                     </a>
                     <div class="account">
                         <div class="id_str">
-                            <a href="#">+{{ user.id_str }}</a>
+                            <a href="#{{ url_for('user.playlist') }}">+{{ user.id_str }}</a>
                         </div>
                         <span class="email">
-                            <a href="#">{{ user.email }}</a>
+                            <a href="#{{ url_for('user.playlist') }}">{{ user.email }}</a>
                         </span>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     </li>
 
                     <li>
-                        <a href="#">
+                        <a href="#{{ url_for('user.playlist') }}">
                             <span class="label">
                                 <i class="fa fa-list fa-fw"></i>
                                 Playlist
