@@ -2,12 +2,12 @@
 <div class="newsfeed" data-id-int="{{ news_feed.id_int }}">
     <div class="inner">
         <div class="meta">
-            <a class="thumbnail" href="#">
+            <a class="thumbnail" href="#{{ url_for('user.playlist', id_int=news_feed.user.id_int) }}">
                 <img src="{{ news_feed.user.picture }}">
             </a>
             <div class="text">
                 <span class="id_str">
-                    <a href="#">{{ news_feed.user.id_str }}</a>
+                    <a href="#{{ url_for('user.playlist', id_int=news_feed.user.id_int) }}">{{ news_feed.user.id_str }}</a>
                     <span>
                         {% if news_feed.news_type == 'archive' %}
                             archived
