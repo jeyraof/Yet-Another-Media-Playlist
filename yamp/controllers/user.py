@@ -63,6 +63,8 @@ class UserController(BaseController):
                             email=user_email,
                             password=user_pw,
                             picture=user_pic)
+        db.add(created_user)
+        db.commit()
 
         created_feed = NewsFeed(news_type=(3,),
                                 data={
@@ -72,14 +74,28 @@ class UserController(BaseController):
                                         u'id_str': user_id,
                                     }
                                 })
-        db.add(created_user)
+
         db.add(created_feed)
         db.commit()
+
 
         return {u'ok': True, u'user': created_user, u'created': True}
 
     @classmethod
-    def get_archived_playlist(cls, **kwargs):
+    def get_user_by_id_int(cls, id_int):
+        user = db.query(User).filter_by(id_int=id_int).first()
+
+        if user:
+            return user
+        return None
+
+    @classmethod
+    def get_all_playlist(cls, **kwargs):
+        """
+        Parameters:
+        user: specific user (default=user of current session)
+        """
+
         playlist = db.query(Playlist)
         user = kwargs.get('user', g.user)
         if isinstance(user, User):
@@ -87,7 +103,13 @@ class UserController(BaseController):
         elif isinstance(user, int):
             playlist = playlist.filter_by(owner=user)
 
-        playlist = playlist.order_by('created_at').first()
+        playlist = playlist.order_by('created_at')
+        return playlist
+
+    @classmethod
+    def get_archived_playlist(cls, **kwargs):
+        all_playlist = cls.get_all_playlist(**kwargs)
+        playlist = all_playlist[0]
         return playlist
 
     @classmethod

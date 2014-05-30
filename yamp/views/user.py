@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Blueprint, url_for, session, flash, redirect, render_template, request
+from flask import Blueprint, url_for, session, flash, redirect, render_template, request, g
 from yamp.helpers.oauth import google, GOOGLE_TOKEN_NAME
 from yamp.controllers.user import UserController
 from yamp.controllers.playlist import PlaylistController
@@ -84,3 +84,21 @@ def archived():
     }
 
     return render_template("user/archived.html", **opt)
+
+
+@view.route('/')
+@view.route('/<int:id_int>')
+@login_required
+def playlist(id_int=None):
+    params = {}
+    if id_int:
+        requested_user = UserController.get_user_by_id_int(id_int)
+        params['user'] = requested_user
+    all_playlist = UserController.get_all_playlist(**params)
+
+    opt = {
+        'all_playlist': all_playlist,
+        'requested_user': params.get('user', g.user),
+    }
+
+    return render_template("user/playlist.html", **opt)
