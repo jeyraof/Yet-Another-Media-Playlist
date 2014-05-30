@@ -75,15 +75,21 @@ def google_authorized(response):
 
 
 @view.route('/archived')
+@view.route('/<int:id_int>/archived')
 @login_required
-def archived():
-    media_list = UserController.get_archived_media()
+def archived(id_int):
+    params = {}
+    if id_int:
+        params['user'] = UserController.get_user_by_id_int(id_int)
+    user_playlist = UserController.get_archived_playlist(**params)
+    all_media = user_playlist.media_list
 
     opt = {
-        'media_list': media_list,
+        'playlist': user_playlist,
+        'media_list': all_media,
     }
 
-    return render_template("user/archived.html", **opt)
+    return render_template('playlist/medialist.html', **opt)
 
 
 @view.route('/')
