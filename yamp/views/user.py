@@ -77,7 +77,7 @@ def google_authorized(response):
 @view.route('/archived')
 @view.route('/<int:id_int>/archived')
 @login_required
-def archived(id_int):
+def archived(id_int=None):
     params = {}
     if id_int:
         params['user'] = UserController.get_user_by_id_int(id_int)
