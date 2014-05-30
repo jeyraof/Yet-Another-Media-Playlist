@@ -1,5 +1,6 @@
 var NEWSFEED_MAX = 0;
 var NEWSFEED_MIN = 0;
+var PLAY_STATUS = 'stop';
 
 function retrieve_hash_page() {
   var url = window.location.hash ? window.location.hash.substring(1) : '/';
