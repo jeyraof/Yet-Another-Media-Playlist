@@ -56,6 +56,11 @@ class PlaylistController(BaseController):
         return cls.create(**params)
 
     @classmethod
+    def get_playlist_by_id_int(cls, id_int):
+        playlist = db.query(Playlist).filter_by(id_int=id_int).first()
+        return playlist
+
+    @classmethod
     def get_playlist_number(cls, **kwargs):
         """
         Parameters:
