@@ -14,7 +14,7 @@
         <ul>
             {% for playlist in all_playlist %}
                 <li class="playlist-item {% if not loop.first %}top-border{% endif %}">
-                    <a href="#">
+                    <a href="#{{ url_for('playlist.media_list', id_int=playlist.id_int) }}">
                         <span class="icon">{% if loop.first %}<i class="fa fa-star-o fa-fw"></i>{% endif %}</span>
                         <span class="count">{{ playlist.item_count }}</span>
                         <span class="title">{{ playlist.title }}</span>
