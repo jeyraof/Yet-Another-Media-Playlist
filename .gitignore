@@ -3,3 +3,6 @@
 *.pyc
 config.cfg
 .venv
+
+mixin.css
+playlist.css
