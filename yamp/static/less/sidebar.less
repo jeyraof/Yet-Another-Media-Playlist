@@ -1,0 +1,220 @@
+@import "mixin";
+@import "constant";
+
+div.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+
+  width: @sidebar-size;
+  background: #ffffff;
+  border-right: 1px solid #1b926c;
+  overflow-x: hidden;
+
+  .inner {
+    position: relative;
+    width: @sidebar-size - 21px;
+    padding: 0 10px;
+    height: 100%;
+    border-right: 1px solid #ffffff;
+  }
+
+  .google-login {
+    padding-top: 15px;
+    display: block;
+
+    img {
+      width: @sidebar-size - 20px;
+    }
+  }
+
+  .profileBox {
+    padding-top: 40px;
+    position: relative;
+
+    .thumbnail {
+      border-radius: 6px;
+      margin: -30px 0 0 0;
+      vertical-align: bottom;
+      display: inline-block !important;
+      line-height: 0;
+
+      img {
+        border-radius: 5px;
+        height: 70px;
+        width: 70px;
+        border: 0;
+      }
+    }
+
+    .logout {
+      position: absolute;
+      top: 10px;
+      right: 0;
+      font-size: 14px;
+      line-height: 16px;
+
+      i {
+        font-size: inherit;
+        line-height: inherit;
+      }
+    }
+
+    .account {
+      position: absolute;
+      top: 45px;
+      left: 80px;
+      width: 190px;
+
+      .id_str {
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 21px;
+
+        a {
+          font-weight: inherit;
+          font-size: inherit;
+          line-height: inherit;
+        }
+      }
+
+      .email {
+        font-size: 12px;
+        color: #66757f;
+
+        a {
+          font-size: inherit;
+          color: inherit;
+
+          &:hover {
+            color: #5fa47b;
+          }
+        }
+      }
+    }
+  }
+
+  ul.menu {
+    margin: 20px 0 0 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      margin-bottom: 4px;
+      border-bottom: 1px solid #ffffff;
+      padding-bottom: 4px;
+
+      transition: border 0.2s;
+
+      &:not(.blank) {
+        &:hover {
+          border-bottom-color: #5fa47b;
+        }
+      }
+
+      span {
+        font-size: 13px;
+        line-height: 15px;
+
+        &.value {
+          float: right;
+        }
+      }
+    }
+  }
+
+  .maker {
+    position: absolute;
+    height: 20px;
+    bottom: 15px;
+    text-align: center;
+    width: @sidebar-size - 21px;
+
+    span {
+      padding-left: 6px;
+    }
+
+    .divider {
+      width: 0;
+      border-right: 1px solid #d2d2d2;
+      padding-left: 0;
+      margin-left:3px;
+    }
+  }
+}
+
+.remote {
+  position: fixed;
+  width: @sidebar-inner;
+  top: 170px;
+  right: 10px;
+  margin: 0;
+  padding: 0;
+
+  background: #ffffff;
+  border-radius: 3px;
+
+  list-style: none;
+  overflow: hidden;
+
+  li {
+    float: left;
+    width: 25%;
+    text-align: center;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #d2d2d2;
+    }
+
+    a {
+      display: block;
+      line-height: 30px;
+      font-size: 15px;
+
+      &:hover {
+        color: #ffffff;
+      }
+
+      i {
+        font-size: inherit;
+      }
+    }
+  }
+}
+
+div.playlist {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: @sidebar-size;
+
+  .inner {
+    position: relative;
+    width: @sidebar-inner;
+    height: 100%;
+    padding: 0 10px 0 0;
+
+    .player {
+      position: absolute;
+      overflow: hidden;
+      width: inherit;
+      height: 150px;
+      top: 10px;
+
+      background: #ffffff;
+    }
+
+    .playlist-item {
+      position: absolute;
+      width: inherit;
+      background: blue;
+      top: 200px;
+      bottom: 0;
+      overflow-x: hidden;
+      overflow-y: scroll;
+    }
+  }
+}

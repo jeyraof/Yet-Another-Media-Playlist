@@ -1,0 +1,78 @@
+@import "mixin";
+@import "constant";
+
+.advertise, .newsfeed {
+  padding: 10px 10px 0;
+
+  .inner {
+    .white-box();
+
+    div.meta {
+      position: relative;
+      min-height: 40px;
+      height: 40px;
+
+      .thumbnail {
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin-right: 8px;
+
+        img {
+          width: inherit;
+          height: inherit;
+        }
+      }
+
+      .text {
+        height: 40px;
+
+        .id_str {
+          display: block;
+          font-size: 14px;
+          line-height: 20px;
+
+          a {
+            line-height: inherit;
+            font-size: inherit;
+            font-weight: bold;
+            color: #54926d;
+          }
+
+          span a {
+            color: #47a7ff;
+            font-weight: normal;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+
+        .date {
+          display: block;
+          margin-top: 3px;
+          font-size: 12px;
+          line-height: 15px;
+          color: #898f9c;
+        }
+      }
+    }
+  }
+}
+
+.newsfeed-more {
+  padding: 10px 10px 0;
+
+  a {
+    display: block;
+    text-align: center;
+
+    padding: 10px;
+    border-radius: 3px;
+    color: #000000;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background: #157254;
+  }
+}
