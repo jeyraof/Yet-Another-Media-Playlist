@@ -6,3 +6,6 @@ config.cfg
 
 mixin.css
 playlist.css
+newsfeed.css
+sidebar.css
+constant.css
