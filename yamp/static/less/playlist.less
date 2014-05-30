@@ -2,91 +2,135 @@
 
 .content-playlist {
   padding: 10px;
-}
 
-.user-info {
-  .white-box();
-  position: relative;
-  height: 40px;
-
-  .profile {
-    position: absolute;
-    display: block;
-    top: 10px;
-    left: 10px;
-    width: 40px;
+  .user-info {
+    .white-box();
+    position: relative;
     height: 40px;
 
-    img {
-      width: inherit;
-      height: inherit;
+    .profile {
+      position: absolute;
+      display: block;
+      top: 10px;
+      left: 10px;
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: inherit;
+        height: inherit;
+      }
+    }
+
+    .text {
+      padding-left: 50px;
+
+      h1 {
+        font-size: 24px;
+        line-height: 40px;
+        padding: 0;
+        margin: 0;
+
+        .id_str {
+          font-size: inherit;
+        }
+      }
     }
   }
 
-  .text {
-    padding-left: 50px;
+  .playlist-info {
+    .white-box();
 
-    h1 {
+    h1.title {
       font-size: 24px;
       line-height: 40px;
       padding: 0;
       margin: 0;
+    }
 
-      .id_str {
-        font-size: inherit;
+    .buttons {
+      a {
+        color: #ffffff;
       }
     }
   }
-}
 
-.all-playlist {
-  .white-box();
-  margin-top: 10px;
+  .all-playlist, .all-media-list {
+    .white-box();
+    margin-top: 10px;
 
-  > ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    > ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
 
-    .playlist-item {
-      padding: 10px 0;
-      position: relative;
+      .playlist-item {
+        padding: 10px 0;
+        position: relative;
 
-      &.top-border {
-        border-top: 1px solid #ececec;
-      }
+        &.top-border {
+          border-top: 1px solid #ececec;
+        }
 
-      > a {
-        display: block;
+        > a {
+          display: block;
 
-        > span {
-          display: inline-block;
-          font-size: 15px;
-          line-height: 18px;
+          > span {
+            display: inline-block;
+            font-size: 15px;
+            line-height: 18px;
 
-          > i {
-            font-size: inherit;
-            line-height: inherit;
-          }
+            > i {
+              font-size: inherit;
+              line-height: inherit;
+            }
 
-          &.icon {
-            position: absolute;
-            top: 10px;
-            left: 5px;
-          }
-          &.title {
-            display: block;
-            padding: 0 50px 0 30px;
-            .text-ellipsis(18px);
-          }
-          &.count {
-            position: absolute;
-            top: 10px;
-            right: 5px;
+            &.icon {
+              position: absolute;
+              top: 10px;
+              left: 5px;
+            }
+            &.title {
+              display: block;
+              padding: 0 50px 0 30px;
+              .text-ellipsis(18px);
+            }
+            &.count {
+              position: absolute;
+              top: 10px;
+              right: 5px;
+            }
           }
         }
       }
 
+      .media-item {
+        padding: 10px 0;
+        position: relative;
+
+        &.top-border {
+          border-top: 1px solid #ececec;
+        }
+
+        span {
+
+          &.icon {
+            position: absolute;
+            left: 0;
+          }
+
+          &.title {
+            display: block;
+            padding: 0 100px 0 20px;
+            .text-ellipsis(14px);
+          }
+
+          &.duration {
+            position: absolute;
+            right: 0px;
+          }
+        }
+      }
     }
   }
 }
