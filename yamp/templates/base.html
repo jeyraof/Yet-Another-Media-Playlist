@@ -7,11 +7,14 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/pure/0.4.2/pure-min.css"/>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/common.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='lib/nanoscroller.css') }}"/>
     {% block css %}{% endblock %}
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     <script src="{{ url_for('static', filename='lib/popcorn.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/popcorn.playlist.js') }}"></script>
+    <script src="{{ url_for('static', filename='lib/jquery.nanoscroller.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/common.js') }}"></script>
     {% block js %}{% endblock %}
 </head>
 <body data-playlist="off">
@@ -96,11 +99,9 @@
     </div>
     <div class="playlist">
         <div class="inner">
-            <div class="player">
-                <iframe width="100%" height="100%" src="//www.youtube.com/embed/pLGyXH1KImc?controls=0&enablejsapi=1&autohide=1&showinfo=0&modestbranding=0" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <div class="playlist-item">
-                &nbsp;
+            <div id="player" class="player"></div>
+            <div class="playlist-item nano">
+                <ul class="nano-content"></ul>
             </div>
         </div>
     </div>
