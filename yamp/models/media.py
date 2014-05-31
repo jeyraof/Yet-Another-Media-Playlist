@@ -27,3 +27,10 @@ class Media(Base):
     @property
     def thumbnail(self):
         return self.data.get(u'thumbnail', None)
+
+    @property
+    def url(self):
+        if self.media_type == 'youtube':
+            return u'http://www.youtube.com/watch?v=%s' % self.id_str
+
+        return u''
