@@ -1,6 +1,8 @@
 var NEWSFEED_MAX = 0;
 var NEWSFEED_MIN = 0;
 var PLAY_STATUS = 'stop';
+var PLAYLIST;
+var PLAYER;
 
 function retrieve_hash_page() {
   var url = window.location.hash ? window.location.hash.substring(1) : '/';
@@ -35,7 +37,7 @@ function ajax_call(url, selector, mode) {
     type: 'GET',
     dataType: 'html',
     success: function (data) {
-      $obj = $(selector);
+      var $obj = $(selector);
       if (mode === 'append') {
         $obj.append(data);
       } else if (mode === 'prepend') {
@@ -68,10 +70,55 @@ $(document).ready(function() {
     return false;
   });
 
-  // toggle playlist
-  $body.on('click', 'a.playlist-swc', function() {
-    var flag = $body.attr('data-playlist') === 'on' ? 'off' : 'on';
-    $body.attr('data-playlist', flag);
-    return false;
+  // start nanoscroller
+  $('.nano').nanoScroller({
+    preventPageScrolling: true,
+    scroll: 'top'
   });
+
+  PLAYER = new Popcorn('#player');
+  PLAYLIST = new PopcornBasket(PLAYER);
+  var items = [
+    {
+      'media_type': 'youtube',
+      'url': 'http://www.youtube.com/watch?v=g5cVE-i5wHI',
+      'duration': 555,
+      'title': '지구가 뭐시기'
+    },
+    {
+      'media_type': 'youtube',
+      'url': 'http://www.youtube.com/watch?v=HW5HU6o1eMA',
+      'duration': 555,
+      'title': '기억을 걷는 시간'
+    },
+    {
+      'media_type': 'youtube',
+      'url': 'http://www.youtube.com/watch?v=0aYIdZZUX6Y',
+      'duration': 555,
+      'title': '도쿄'
+    }
+  ];
+  PLAYLIST.importData(items);
+
+  if (items.length > 0) {
+    draw_playlist(items);
+  }
 });
+
+function draw_playlist(items) {
+  var list = $('ul.nano-content');
+  list.html('');
+  $.each(items, function(idx, item) {
+    var item_object =
+      '<li class="media">' +
+        '<a href="#">' +
+          '<p>' + item.title + '</p>' +
+          '<p>' +
+            '<span class="icon"><i class="fa fa-' + item.media_type + ' fa-fw></i>&nbsp;&nbsp;</span>' +
+            '<span class="duration">' + item.duration + '</span>' +
+          '</p>' +
+        '</a>' +
+      '</li>';
+     list.append(item_object);
+  });
+}
