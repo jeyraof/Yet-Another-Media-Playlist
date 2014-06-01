@@ -76,33 +76,26 @@ $(document).ready(function() {
     scroll: 'top'
   });
 
+  // Initialize player
   PLAYER = new Popcorn('#player');
   PLAYLIST = new PopcornBasket(PLAYER);
-  var items = [
-    {
-      'media_type': 'youtube',
-      'url': 'http://www.youtube.com/watch?v=g5cVE-i5wHI',
-      'duration': 555,
-      'title': '지구가 뭐시기'
-    },
-    {
-      'media_type': 'youtube',
-      'url': 'http://www.youtube.com/watch?v=HW5HU6o1eMA',
-      'duration': 555,
-      'title': '기억을 걷는 시간'
-    },
-    {
-      'media_type': 'youtube',
-      'url': 'http://www.youtube.com/watch?v=0aYIdZZUX6Y',
-      'duration': 555,
-      'title': '도쿄'
-    }
-  ];
-  PLAYLIST.importData(items);
 
-  if (items.length > 0) {
-    draw_playlist(items);
-  }
+  // event listener
+  $body.on('click', 'a.playlist-btn-add', function() {
+    var url = $(this).attr('href');
+    $.ajax({
+      url: url,
+      async: false,
+      type: 'GET',
+      dataType: 'json',
+      success: function (data) {
+        PLAYLIST.importData(data.media_list);
+        draw_playlist(data.media_list);
+      }
+    });
+
+    return false;
+  });
 });
 
 function draw_playlist(items) {
