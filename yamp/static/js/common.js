@@ -52,6 +52,9 @@ function ajax_call(url, selector, mode) {
 $(document).ready(function() {
   var $body = $('body');
 
+  // get youtube api
+  load_youtube_api();
+
   // initial page load
   var hash = window.location.hash;
   if (hash) retrieve_hash_page();
@@ -77,8 +80,8 @@ $(document).ready(function() {
   });
 
   // Initialize player
-  PLAYER = new Popcorn('#player');
-  PLAYLIST = new PopcornBasket(PLAYER);
+  PLAYER = '#player';
+  PLAYLIST = new Playlist(PLAYER);
 
   // event listener
   $body.on('click', 'a.playlist-btn-add', function() {
@@ -96,6 +99,37 @@ $(document).ready(function() {
 
     return false;
   });
+
+  // remote controller listener
+  $body.on('click', 'ul.remote a', function() {
+    var obj = $(this);
+    if (obj.hasClass('play')) {
+      if (PLAYLIST.playerObj !== null) {
+        PLAYLIST.playerObj.playVideo();
+      } else {
+        PLAYLIST.pipe('play', function() {});
+      }
+      $('.remote').addClass('play');
+
+    } else if (obj.hasClass('pause')) {
+      if (PLAYLIST.playerObj !== null) {
+        PLAYLIST.playerObj.pauseVideo();
+      } else {
+        PLAYLIST.pipe('pause', function() {});
+      }
+      $('.remote').removeClass('play');
+
+    } else if (obj.hasClass('backward')) {
+      PLAYLIST.prev();
+      $('.remote').addClass('play');
+
+    } else if (obj.hasClass('forward')) {
+      PLAYLIST.next();
+      $('.remote').addClass('play');
+    }
+
+    return false;
+  });
 });
 
 function draw_playlist(items) {
@@ -103,7 +137,7 @@ function draw_playlist(items) {
   list.html('');
   $.each(items, function(idx, item) {
     var item_object =
-      '<li class="media">' +
+      '<li class="media" data-play-order="' + idx + '" data-id="' + item.url + '">' +
         '<a href="#">' +
           '<p>' + item.title + '</p>' +
           '<p>' +
@@ -114,4 +148,11 @@ function draw_playlist(items) {
       '</li>';
      list.append(item_object);
   });
+}
+
+function load_youtube_api() {
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 }
