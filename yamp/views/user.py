@@ -76,7 +76,6 @@ def google_authorized(response):
 
 @view.route('/archived')
 @view.route('/<int:id_int>/archived')
-@login_required
 def archived(id_int=None):
     params = {}
     if id_int:
@@ -94,7 +93,6 @@ def archived(id_int=None):
 
 @view.route('/')
 @view.route('/<int:id_int>')
-@login_required
 def playlist(id_int=None):
     params = {}
     if id_int:
