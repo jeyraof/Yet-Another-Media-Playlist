@@ -24,25 +24,19 @@ function Playlist(player) {
           videoId: item.id_str,
           suggestedQuality: 'default',
           events: {
-            'onReady': onReady,
-            'onStateChange': onStateChange,
-            'onError': onError
+            'onReady': function(event) {
+              event.target.playVideo();
+            },
+            'onStateChange': function (event) {
+              if (event.data == YT.PlayerState.ENDED) {
+                youtube_skip();
+              }
+            },
+            'onError': function (event) {
+              youtube_skip();
+            }
           }
         });
-
-        function onReady(event) {
-          event.target.playVideo();
-        }
-
-        function onStateChange(event) {
-          if (event.data == YT.PlayerState.ENDED) {
-            youtube_skip();
-          }
-        }
-
-        function onError(event) {
-          youtube_skip();
-        }
       }
     }
   };

@@ -49,7 +49,7 @@ function ajax_call(url, selector, mode) {
   });
 }
 
-$(document).ready(function() {
+$(window).load(function() {
   var $body = $('body');
 
   // get youtube api
