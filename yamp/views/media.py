@@ -22,7 +22,10 @@ def media():
 @disable_if_not_active
 def archive():
     if request.method == 'GET':
-        return render_template("media/archive.html")
+        opt = {
+            'bookmarklet_address': url_for('media.bookmarklet', _external=True),
+        }
+        return render_template("media/archive.html", **opt)
 
     else:
         inspected_data = MediaController.inspect_url(request.form)
