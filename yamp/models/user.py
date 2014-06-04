@@ -14,6 +14,6 @@ class User(Base):
     password = Column('password', types.Unicode(255), nullable=False, default=u'')
     picture = Column('picture', types.Unicode(255), nullable=True, default=u'')
 
-    active = Column('active', types.Boolean, default=False)
+    active = Column('active', types.Boolean, default=True)
 
     joined_at = Column('joined_at', types.DateTime, nullable=False, default=func.now(), index=True)
