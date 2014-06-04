@@ -23,6 +23,7 @@ def media_list(id_int):
                 'media_type': media.media_type,
                 'title': media.title,
                 'duration': media.duration,
+                'id_str': media.id_str,
                 'url': media.url,
             })
 
